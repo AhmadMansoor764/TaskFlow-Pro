@@ -600,7 +600,7 @@ app.post("/forgot-password", async (req, res) => {
       },
     });
 
-    const resetLink = `https://amo-todo-mern.netlify.app/reset-password/${resetToken}`;
+    const resetLink = `https://amo-todo-full-stack-mern.netlify.app/reset-password/${resetToken}`;
 
     console.log("Sending email to:", email);
     console.log("Reset link:", resetLink);
