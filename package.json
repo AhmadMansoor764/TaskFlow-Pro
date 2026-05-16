@@ -1,0 +1,18 @@
+{
+  "name": "todo-app-full-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd BACK_END && node app.js\" \"cd FRONT_END && npm run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "nodemailer": "^8.0.7",
+    "recharts": "^3.8.1"
+  }
+}

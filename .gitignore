@@ -1,0 +1,12 @@
+node_modules
+FRONT_END/node_modules
+BACK_END/node_modules
+
+.env
+FRONT_END/.env
+BACK_END/.env
+
+dist
+FRONT_END/dist
+
+build
