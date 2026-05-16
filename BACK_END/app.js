@@ -15,7 +15,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend URL
+    origin: ["http://localhost:5173", "https://amo-todo-mern.netlify.app"],
     credentials: true,
   }),
 );
@@ -78,8 +78,8 @@ app.post("/signup", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true, // cannot be accessed via JS
-      secure: false, // true in production (HTTPS)
-      sameSite: "strict", // CSRF protection
+      secure: true, // true in production (HTTPS)
+      sameSite: "none", // CSRF protection
       maxAge: 60 * 60 * 1000, // 1 day
     });
 
@@ -130,8 +130,8 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true, // cannot be accessed via JS
-      secure: false, // true in production (HTTPS)
-      sameSite: "strict", // CSRF protection
+      secure: true, // true in production (HTTPS)
+      sameSite: "none", // CSRF protection
       maxAge: 60 * 60 * 1000, // 1 day
     });
 
@@ -597,7 +597,7 @@ app.post("/forgot-password", async (req, res) => {
       },
     });
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://amo-todo-mern.netlify.app/reset-password/${resetToken}`;
 
     console.log("Sending email to:", email);
     console.log("Reset link:", resetLink);
@@ -652,8 +652,8 @@ app.post("/reset-password/:token", async (req, res) => {
 app.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
   });
 
   res.json({
