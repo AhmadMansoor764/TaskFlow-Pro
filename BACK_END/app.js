@@ -15,7 +15,10 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://amo-todo-mern.netlify.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://amo-todo-full-stack-mern.netlify.app",
+    ],
     credentials: true,
   }),
 );
