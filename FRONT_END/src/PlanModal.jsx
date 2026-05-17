@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import image from "./assets/fourth.jpg";
 
 const PlanModal = ({ setShowModal, fetchPlans }) => {
+  const [error, setError] = useState("");
   const takeDate = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const title = formData.get("title");
+    const title = formData.get("title").trim();
     const startDate = formData.get("date");
 
-    if (!title || !startDate) return alert("Please fill all the blanks");
-    if (!/[a-zA-Z]/.test(title)) return alert("Please enter a valid title");
-    if (title.trim().length < 3) return alert("Please enter longer title");
+    const showError = (message) => {
+      setError(message);
+      setTimeout(() => setError(""), 3000);
+    };
+
+    if (!title || !startDate) return showError("Please fill all the blanks");
+    if (!/[a-zA-Z]/.test(title)) return showError("Please enter a valid title");
+    if (title.length < 3) return showError("Please enter a longer title");
 
     const days = Array.from({ length: 30 }, (_, index) => ({
       dayNumber: index + 1,
@@ -19,28 +25,31 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
       completed: false,
     }));
 
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/plan`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        title,
-        startDate,
-        days: days,
-      }),
-    });
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/plan`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title,
+          startDate,
+          days,
+        }),
+      });
 
-    const reslut = await res.json();
+      const result = await res.json();
 
-    if (!res.ok) return alert(reslut.message);
+      if (!res.ok) return showError(result.message);
 
-    console.log(reslut);
-
-    e.target.reset();
-    setShowModal(false);
-    fetchPlans();
+      e.target.reset();
+      setShowModal(false);
+      fetchPlans();
+    } catch (error) {
+      showError("Something went wrong");
+      console.log(error);
+    }
   };
 
   return (
@@ -74,6 +83,7 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
             type="date"
             name="date"
             id="date"
+            min={new Date().toISOString().split("T")[0]}
           />
         </div>
 
@@ -83,6 +93,9 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
         >
           Create Plan
         </button>
+        <p className="text-center text-red-400 font-semibold text-2xl">
+          {error}
+        </p>
       </form>
     </div>
   );

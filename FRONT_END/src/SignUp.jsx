@@ -45,11 +45,10 @@ const SignUp = () => {
       const result = await res.json();
 
       if (!res.ok) {
-        alert(result.message);
+        setError(result.message);
+        setTimeout(() => setError(""), 3000);
         return;
       }
-
-      console.log(result);
 
       navigate("/dashboard");
       e.target.reset();
@@ -113,21 +112,21 @@ const SignUp = () => {
 
             <button
               type="submit"
-              className="p-3 rounded-2xl bg-blue-600 mt-12 font-semibold text-[1.2rem]"
+              className="p-3 rounded-2xl bg-blue-600 mt-8 font-semibold text-[1.2rem]"
             >
               sign up
             </button>
             <div className="flex flex-col">
-              <p className="text-center mt-3 text-[1.1rem]">
-                Already a memeber{" "}
+              <p className="text-center text-[1.1rem] flex flex-wrap justify-center gap-1">
+                <span>Already a member?</span>
                 <Link
-                  className="text-[1.2rem] text-blue-600 font-semibold"
+                  className="text-[1.2rem] text-blue-600 font-semibold whitespace-nowrap"
                   to="/login"
                 >
                   Sign in
-                </Link>{" "}
+                </Link>
               </p>
-              <p>{error}</p>
+              <p className="text-center text-red-600 font-semibold">{error}</p>
             </div>
           </form>
         </div>

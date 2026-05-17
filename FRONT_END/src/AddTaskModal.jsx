@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import imageBg from "./assets/fourth.jpg";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AddTaskModal = ({ showModal, setShowModal, editingTask, fetchTasks }) => {
   const [error, setError] = useState("");
@@ -62,8 +63,8 @@ const AddTaskModal = ({ showModal, setShowModal, editingTask, fetchTasks }) => {
 
     try {
       const url = editingTask
-        ? `http://localhost:3000/tasks/${editingTask._id}`
-        : "http://localhost:3000/tasks";
+        ? `${API_URL}/tasks/${editingTask._id}`
+        : `${API_URL}/tasks`;
 
       const method = editingTask ? "PUT" : "POST";
 
@@ -79,7 +80,11 @@ const AddTaskModal = ({ showModal, setShowModal, editingTask, fetchTasks }) => {
       const result = await res.json();
 
       if (!res.ok) {
-        return alert(result.message);
+        setError(result.message);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+        return;
       }
 
       fetchTasks();

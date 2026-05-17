@@ -59,7 +59,7 @@ const Dashboard = () => {
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <p className="text-[#6f7074] font-stretch-expanded ">
-            Welcome back, {info.user?.name || "Unknown"} 👋
+            Welcome, {info.user?.name || "Unknown"} 👋
           </p>
         </div>
 

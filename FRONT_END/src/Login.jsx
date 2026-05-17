@@ -43,7 +43,11 @@ const Login = () => {
       const result = await res.json();
 
       if (!res.ok) {
-        return alert(result.message);
+        setError(result.message);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+        return;
       }
 
       navigate("/dashboard");
