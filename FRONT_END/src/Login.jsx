@@ -66,7 +66,7 @@ const Login = () => {
           <h1 className="text-3xl font-semibold">Login to Your Account</h1>
           <form
             onSubmit={getInfo}
-            className="bg-white  w-[90%] h-full p-6 rounded-2xl flex flex-col gap-5 shadow-md lg:w-5/7"
+            className="bg-white  w-[90%] h-full p-6 rounded-2xl flex flex-col gap-5 shadow-md lg:w-5/7 md:h-[50%]"
           >
             <div className="flex flex-col gap-2">
               <label className="font-semibold" htmlFor="email">
