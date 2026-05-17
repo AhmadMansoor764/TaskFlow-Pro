@@ -15,10 +15,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://amo-todo-full-stack-mern.netlify.app",
-    ],
+    origin: ["http://localhost:5173", "https://omarzai-todo-mern.netlify.app"],
     credentials: true,
   }),
 );
@@ -600,7 +597,7 @@ app.post("/forgot-password", async (req, res) => {
       },
     });
 
-    const resetLink = `https://amo-todo-full-stack-mern.netlify.app/reset-password/${resetToken}`;
+    const resetLink = `https://omarzai-todo-mern.netlify.app/reset-password/${resetToken}`;
 
     console.log("Sending email to:", email);
     console.log("Reset link:", resetLink);
