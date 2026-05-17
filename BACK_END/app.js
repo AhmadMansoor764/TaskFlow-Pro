@@ -377,6 +377,9 @@ app.put("/tasks/:id/status", authMiddleware, async (req, res) => {
     } else if (user.streak >= 5) {
       user.badge = "🔥 Rising Star";
       user.achievement = "5 tasks completed in a row";
+    } else if (user.streak >= 3) {
+      user.badge = "🥉 Bronze";
+      user.achievement = "3 tasks completed in a row";
     }
 
     await user.save();
