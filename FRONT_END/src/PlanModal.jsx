@@ -79,7 +79,7 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
             Plan Start Date
           </label>
           <input
-            className="p-2 rounded-md border-2 border-gray-100 bg-gray-600"
+            className="p-2 rounded-md border-2 border-gray-100 bg-gray-600 w-full"
             type="date"
             name="date"
             id="date"
