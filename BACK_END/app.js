@@ -368,17 +368,20 @@ app.put("/tasks/:id/status", authMiddleware, async (req, res) => {
 
     console.log("NEW STREAK:", user.streak);
 
-    if (user.streak >= 40) {
-      user.badge = "🥇 Gold Master";
-      user.achievement = "40 tasks completed in a row";
+    if (user.streak >= 50) {
+      user.badge = "👑 Master Achiever";
+      user.achievement = "50 tasks completed in a row";
+    } else if (user.streak >= 30) {
+      user.badge = "💎 Diamond Consistency";
+      user.achievement = "30 tasks completed in a row";
     } else if (user.streak >= 15) {
-      user.badge = "💎 Diamond Pro";
+      user.badge = "🥇 Gold Discipline";
       user.achievement = "15 tasks completed in a row";
-    } else if (user.streak >= 5) {
-      user.badge = "🔥 Rising Star";
-      user.achievement = "5 tasks completed in a row";
+    } else if (user.streak >= 7) {
+      user.badge = "🥈 Silver Streak";
+      user.achievement = "7 tasks completed in a row";
     } else if (user.streak >= 3) {
-      user.badge = "🥉 Bronze";
+      user.badge = "🥉 Bronze Focus";
       user.achievement = "3 tasks completed in a row";
     }
 

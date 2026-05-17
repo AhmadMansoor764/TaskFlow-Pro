@@ -108,7 +108,15 @@ const Tasks = () => {
     }
   };
 
-  const categories = ["A", "B", "C"];
+  const categories = [
+    "Personal",
+    "Work",
+    "Study",
+    "Travel",
+    "Urgent",
+    "Important",
+    "Exercise",
+  ];
 
   return (
     <div className="p-4 bg-[#efefef] h-full">

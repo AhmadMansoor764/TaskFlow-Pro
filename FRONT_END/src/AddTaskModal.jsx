@@ -159,12 +159,20 @@ const AddTaskModal = ({ showModal, setShowModal, editingTask, fetchTasks }) => {
               transition-all duration-300 ease-in-out
               ${
                 open
-                  ? "opacity-100 scale-100"
+                  ? "opacity-100 scale-100 max-h-36 overflow-y-auto"
                   : "opacity-0 scale-95 pointer-events-none"
               }
             `}
           >
-            {["A", "B", "C"].map((item) => (
+            {[
+              "Personal",
+              "Work",
+              "Study",
+              "Travel",
+              "Urgent",
+              "Important",
+              "Exercise",
+            ].map((item) => (
               <p
                 key={item}
                 onClick={() => {
