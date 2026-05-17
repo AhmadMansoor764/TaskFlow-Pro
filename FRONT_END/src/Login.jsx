@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
+  const [error, setError] = useState("");
 
   const showPassword = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
@@ -22,7 +23,10 @@ const Login = () => {
     };
 
     if (!data.email || !data.password) {
-      alert("Please enter email and password");
+      setError("Please fill all fields");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
       return;
     }
 
@@ -42,7 +46,6 @@ const Login = () => {
         return alert(result.message);
       }
 
-      alert("Welcome");
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
@@ -59,7 +62,7 @@ const Login = () => {
           <h1 className="text-3xl font-semibold">Login to Your Account</h1>
           <form
             onSubmit={getInfo}
-            className="bg-white  w-6/7 h-[60%] p-6 rounded-2xl flex flex-col gap-5 shadow-md lg:w-5/7"
+            className="bg-white  w-[90%] h-full p-6 rounded-2xl flex flex-col gap-5 shadow-md lg:w-5/7"
           >
             <div className="flex flex-col gap-2">
               <label className="font-semibold" htmlFor="email">
@@ -101,15 +104,18 @@ const Login = () => {
             >
               Login
             </button>
-            <p className="text-center mt-3 text-[1.1rem]">
-              Don't have an account?{" "}
-              <Link
-                className="text-[1.2rem] text-blue-600 font-semibold"
-                to="/signup"
-              >
-                Sign Up
-              </Link>{" "}
-            </p>
+            <div className="flex flex-col ">
+              <p className="text-center mt-3 text-[1.1rem]">
+                Don't have an account?{" "}
+                <Link
+                  className="text-[1.2rem] text-blue-600 font-semibold"
+                  to="/signup"
+                >
+                  Sign Up
+                </Link>{" "}
+              </p>
+              <p className="text-center text-red-600 font-semibold">{error}</p>
+            </div>
           </form>
         </div>
         <div className="hidden md:flex">

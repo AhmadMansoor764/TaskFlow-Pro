@@ -35,7 +35,7 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
     const reslut = await res.json();
 
     if (!res.ok) return alert(reslut.message);
-    alert("Plan created successfully");
+
     console.log(reslut);
 
     e.target.reset();

@@ -6,6 +6,7 @@ import { IoMdEyeOff } from "react-icons/io";
 
 const SignUp = () => {
   const [passwordType, setPasswordType] = useState("password");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const showPassword = () => {
@@ -24,7 +25,10 @@ const SignUp = () => {
     };
 
     if (!data.email || !data.name || !data.password) {
-      alert("Please fill all fields");
+      setError("Please fill all fields");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
       return;
     }
 
@@ -47,7 +51,6 @@ const SignUp = () => {
 
       console.log(result);
 
-      alert("User created successfully");
       navigate("/dashboard");
       e.target.reset();
     } catch (error) {
@@ -63,7 +66,7 @@ const SignUp = () => {
           <h1 className="text-3xl font-semibold">Create an Account</h1>
           <form
             onSubmit={getInfo}
-            className="bg-white  w-6/7 h-[75%] p-6 rounded-2xl flex flex-col gap-5 lg:w-5/7"
+            className="bg-white  w-[90%] h-[80%] p-6 rounded-2xl flex flex-col gap-5 lg:w-5/7"
           >
             <div className="flex flex-col gap-2">
               <label className="font-semibold" htmlFor="name">
@@ -114,15 +117,18 @@ const SignUp = () => {
             >
               sign up
             </button>
-            <p className="text-center mt-3 text-[1.1rem]">
-              Already a memeber{" "}
-              <Link
-                className="text-[1.2rem] text-blue-600 font-semibold"
-                to="/login"
-              >
-                Sign in
-              </Link>{" "}
-            </p>
+            <div className="flex flex-col">
+              <p className="text-center mt-3 text-[1.1rem]">
+                Already a memeber{" "}
+                <Link
+                  className="text-[1.2rem] text-blue-600 font-semibold"
+                  to="/login"
+                >
+                  Sign in
+                </Link>{" "}
+              </p>
+              <p>{error}</p>
+            </div>
           </form>
         </div>
         <div className="hidden md:flex">

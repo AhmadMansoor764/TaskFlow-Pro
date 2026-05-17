@@ -82,8 +82,6 @@ const AddTaskModal = ({ showModal, setShowModal, editingTask, fetchTasks }) => {
         return alert(result.message);
       }
 
-      alert(result.message);
-
       fetchTasks();
       setShowModal(false);
     } catch (error) {
@@ -97,7 +95,7 @@ const AddTaskModal = ({ showModal, setShowModal, editingTask, fetchTasks }) => {
       style={{ backgroundImage: `url(${imageBg})`, backgroundSize: "cover" }}
     >
       <form
-        className="flex flex-col gap-10 h-[75%] w-full mx-auto bg-gray-300 p-4 rounded-md py-8 md:w-[50%] md:self-center md:ml-70 lg:w-[60%] xl:h-[85%]"
+        className="flex flex-col gap-10 h-[80%] w-full mx-auto bg-gray-300 p-4 rounded-md py-8 md:w-[50%] md:self-center md:ml-70 lg:w-[60%] xl:h-[85%]"
         onSubmit={getTaskInfo}
       >
         <h1 className="text-3xl font-medium text-gray-800 text-center">
