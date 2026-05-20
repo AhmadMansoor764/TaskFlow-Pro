@@ -59,7 +59,7 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
     >
       <form
         onSubmit={takeDate}
-        className="flex flex-col gap-10 h-[60%] w-full mx-auto bg-gray-300 p-4 rounded-md py-8 sm:w-[80%] md:w-[50%] md:self-center md:ml-70 lg:w-[60%]"
+        className="flex flex-col gap-10 h-[60%] w-full mx-auto bg-gray-300 p-4 rounded-md py-8 sm:w-[80%] md:w-[50%] md:self-center md:ml-70 lg:w-[60%] 2xl:h-[70%]"
       >
         <h1 className="text-2xl font-bold mb-4 text-gray-800 ">Create Plan</h1>
         <div className="flex flex-col gap-1">
@@ -93,7 +93,7 @@ const PlanModal = ({ setShowModal, fetchPlans }) => {
         >
           Create Plan
         </button>
-        <p className="text-center text-red-400 font-semibold text-2xl">
+        <p className="text-center text-red-700 font-semibold text-2xl">
           {error}
         </p>
       </form>

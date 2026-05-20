@@ -10,6 +10,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   const filterdTasks = tasks.filter((task) => {
     if (activeCategory === "All") return true;
@@ -34,6 +35,8 @@ const Tasks = () => {
       setTasks(result);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -118,6 +121,14 @@ const Tasks = () => {
     "Exercise",
   ];
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-[#F8FAFC]">
+        <div className="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-4 bg-[#efefef] h-full">
       <div className="flex justify-between items-center border-b-2 border-b-gray-700 pb-3">
@@ -149,6 +160,29 @@ const Tasks = () => {
       />
 
       <div className="max-h-[85%] overflow-y-scroll">
+        {/* EMPTY TASK STATE */}
+        {filterdTasks.length === 0 && (
+          <div className="bg-white p-6 rounded-xl text-center mt-5 border border-gray-200 shadow-sm">
+            <h2 className="text-2xl font-semibold text-gray-800">
+              No Tasks Yet
+            </h2>
+
+            <p className="text-gray-500 mt-2">
+              Start organizing your life by creating your first task 🚀
+            </p>
+
+            <button
+              onClick={() => {
+                setEditingTask(null);
+                setShowModal(true);
+              }}
+              className="mt-5 bg-blue-600 hover:bg-blue-700 transition text-white px-5 py-2 rounded-lg font-medium"
+            >
+              + Create Task
+            </button>
+          </div>
+        )}
+
         {categories.map((category) => {
           const filteredTasks = filterdTasks.filter(
             (task) => task.category === category,

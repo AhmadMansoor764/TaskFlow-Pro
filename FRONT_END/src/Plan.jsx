@@ -15,6 +15,7 @@ const Plan = () => {
   const navigate = useNavigate();
   const [plans, setPlans] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const totalPlans = plans.length;
   const activePlans = plans.filter((plan) => plan.status === "active").length;
@@ -41,6 +42,8 @@ const Plan = () => {
       setPlans(result);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,10 +71,19 @@ const Plan = () => {
       }
 
       setPlans((prev) => prev.filter((plan) => plan._id !== id));
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-white">
+        <div className="w-14 h-14 rounded-full border-4 border-t-transparent animate-spin"></div>
+      </div>
+    );
+  }
 
   return showModal ? (
     <PlanModal setShowModal={setShowModal} fetchPlans={fetchPlans} />
@@ -145,6 +157,23 @@ const Plan = () => {
 
         {/*Plans*/}
         <div className="grid grid-cols-1 mt-2 gap-3 overflow-y-scroll max-h-120">
+          {plans.length === 0 && (
+            <div className="bg-white p-6 rounded-xl text-center mt-5 border">
+              <h2 className="text-xl font-semibold">No Plans Yet</h2>
+
+              <p className="text-gray-500 mt-2">
+                Start your first 30 days challenge 🚀
+              </p>
+
+              <button
+                onClick={toggleModal}
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md"
+              >
+                Create Plan
+              </button>
+            </div>
+          )}
+
           {plans.map((plan) => (
             <div
               key={plan._id}

@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [showAchievement, setShowAchievement] = useState(false);
   const [showLevels, setShowLevels] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -41,9 +42,10 @@ const Dashboard = () => {
         console.log("Dashboard Data:", data);
 
         setInfo(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
-
+        setLoading(false);
         navigate("/login");
       }
     };
@@ -52,6 +54,16 @@ const Dashboard = () => {
   }, []);
 
   console.log("this is the info", info);
+
+  // here is the loading spinner that i added because of the suggestion :
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-[#F8FAFC]">
+        <div className="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#F8FAFC] max-h-screen overflow-y-scroll">
       {/* Top section to show the header (name) and (dashboard) */}

@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const showPassword = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
@@ -30,6 +31,8 @@ const Login = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
         method: "post",
@@ -43,6 +46,7 @@ const Login = () => {
       const result = await res.json();
 
       if (!res.ok) {
+        setLoading(false); // ADD
         setError(result.message);
         setTimeout(() => {
           setError("");
@@ -50,14 +54,24 @@ const Login = () => {
         return;
       }
 
+      setLoading(false);
       navigate("/dashboard");
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
 
     e.target.reset();
     setPasswordType("password");
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-[#F8FAFC]">
+        <div className="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen w-full p-10 bg-[#efefef]">
