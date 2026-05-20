@@ -80,7 +80,7 @@ const Plan = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen bg-white">
-        <div className="w-14 h-14 rounded-full border-4 border-t-transparent animate-spin"></div>
+        <div className="w-14 h-14 rounded-full border-4 border-t-transparent animate-spin text-blue-600"></div>
       </div>
     );
   }

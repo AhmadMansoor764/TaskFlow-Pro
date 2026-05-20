@@ -312,35 +312,56 @@ const Dashboard = () => {
               Tasks progress of your active plans
             </p>
           </div>
-          {info.topPlans?.map((plan) => {
-            const percentage = Math.floor((plan.progress * 100) / 30);
+          {info.topPlans && info.topPlans.length > 0 ? (
+            info.topPlans.map((plan) => {
+              const percentage = Math.floor((plan.progress * 100) / 30);
 
-            return (
-              <div
-                key={plan._id}
-                className="bg-[#f0f1f3] p-2 px-4 rounded-md flex flex-col mt-4 border-2 border-[#E5E7EB]"
+              return (
+                <div
+                  key={plan._id}
+                  className="bg-[#f0f1f3] p-2 px-4 rounded-md flex flex-col mt-4 border-2 border-[#E5E7EB]"
+                >
+                  <div className="flex justify-between w-full">
+                    <p className="text-[1.1rem] font-semibold">{plan.title}</p>
+
+                    <p className="text-blue-600 font-medium">{percentage}%</p>
+                  </div>
+
+                  <p className="text-[#6f7074] mb-2">
+                    Started on {new Date(plan.startDate).toLocaleDateString()}
+                  </p>
+
+                  <div className="h-1.5 w-full bg-gray-400 rounded-md">
+                    <div
+                      className="h-1.5 bg-blue-600 rounded-md"
+                      style={{
+                        width: `${percentage}%`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="flex flex-col items-center justify-center py-10 text-center">
+              <div className="text-5xl mb-3">📅</div>
+
+              <h3 className="text-xl font-semibold text-gray-700">
+                No Active Plans
+              </h3>
+
+              <p className="text-gray-500 mt-2">
+                Start a 30 days challenge to track your progress 🚀
+              </p>
+
+              <button
+                onClick={() => navigate("/plans")}
+                className="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition"
               >
-                <div className="flex justify-between w-full">
-                  <p className="text-[1.1rem] font-semibold">{plan.title}</p>
-
-                  <p className="text-blue-600 font-medium">{percentage}%</p>
-                </div>
-
-                <p className="text-[#6f7074] mb-2">
-                  Started on {new Date(plan.startDate).toLocaleDateString()}
-                </p>
-
-                <div className="h-1.5 w-full bg-gray-400 rounded-md">
-                  <div
-                    className="h-1.5 bg-blue-600 rounded-md"
-                    style={{
-                      width: `${percentage}%`,
-                    }}
-                  ></div>
-                </div>
-              </div>
-            );
-          })}{" "}
+                Create Plan
+              </button>
+            </div>
+          )}
         </div>
         {/*end of linear graph */}
       </div>
